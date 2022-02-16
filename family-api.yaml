@@ -1,3 +1,4 @@
+---
 openapi: 3.0.0
 info:
   title: Family List
@@ -21,7 +22,7 @@ paths:
     get:
       tags:
       - Family
-      summary: Get family data testchanges
+      summary: Get family data testchanges testchanges2
       description: Insert family uuid to get details
       operationId: searchInventory
       parameters:
@@ -75,8 +76,6 @@ paths:
       - name: id
         in: path
         required: true
-        style: simple
-        explode: false
         schema:
           type: string
       - name: searchString
@@ -119,6 +118,7 @@ paths:
                   $ref: '#/components/schemas/InventoryItem'
         "400":
           description: bad input parameter
+
 components:
   schemas:
     InventoryItem:
@@ -139,6 +139,7 @@ components:
         releaseDate:
           type: string
           format: date-time
+          example: 2016-08-29T09:12:33.001Z
         manufacturer:
           $ref: '#/components/schemas/Manufacturer'
     Manufacturer:
