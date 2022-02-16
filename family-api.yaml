@@ -22,13 +22,13 @@ paths:
     get:
       tags:
       - Family
-      summary: Get family data
+      summary: Get family data testchanges
       description: Insert family uuid to get details
       operationId: searchInventory
       parameters:
       - name: searchString
         in: query
-        description: pass an optional search string for looking up inventory
+        description: testchanges
         required: false
         style: form
         explode: true
@@ -72,8 +72,12 @@ paths:
       - Family
       summary: Get family data
       description: Insert family uuid to get details
-      operationId: searchInventory
       parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
       - name: searchString
         in: query
         description: pass an optional search string for looking up inventory
@@ -114,25 +118,7 @@ paths:
                   $ref: '#/components/schemas/InventoryItem'
         "400":
           description: bad input parameter
-    post:
-      tags:
-      - Family Member
-      summary: adds an inventory item
-      description: Adds an item to the system
-      operationId: addInventory
-      requestBody:
-        description: Inventory item to add
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InventoryItem'
-      responses:
-        "201":
-          description: item created
-        "400":
-          description: invalid input, object invalid
-        "409":
-          description: an existing item already exists
+
 components:
   schemas:
     InventoryItem:
