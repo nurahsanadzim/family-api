@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Family List
-  description: This is a simple API
+  description: Family API
   contact:
     email: you@your-company.com
   license:
@@ -10,61 +10,36 @@ info:
   version: 1.0.0
 servers:
 - url: https://virtserver.swaggerhub.com/nurahsanadzim/family_list/1.0.0
-  description: SwaggerHub API Auto Mocking
+  description: Mock
 tags:
 - name: Family
   description: Family Entity Data
 - name: Family Member
   description: Family Entity Member
+
 paths:
   /family:
     get:
       tags:
       - Family
-      summary: Get family data testchanges testchanges2 testchanges3
-      description: Insert family uuid to get details
-      operationId: searchInventory
-      parameters:
-      - name: searchString
-        in: query
-        description: testchanges
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: skip
-        in: query
-        description: number of records to skip for pagination
-        required: false
-        style: form
-        explode: true
-        schema:
-          minimum: 0
-          type: integer
-          format: int32
-      - name: limit
-        in: query
-        description: maximum number of records to return
-        required: false
-        style: form
-        explode: true
-        schema:
-          maximum: 50
-          minimum: 0
-          type: integer
-          format: int32
+      summary: get family
+      description: get all family with id
+      operationId: getAllFamily
       responses:
         "200":
-          description: search results matching criteria
+          description: success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InventoryItem'
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/metaContent'
+                  responses:
+                    $ref: '#/components/schemas/metaParent'
         "400":
           description: bad input parameter
+
   /family{id}:
     get:
       tags:
@@ -109,18 +84,35 @@ paths:
           type: integer
           format: int32
       responses:
-        "200":
+        '200':
           description: search results matching criteria
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/InventoryItem'
+                properties:
+                  meta1:
+                    $ref: '#/components/schemas/metaParent'
         "400":
           description: bad input parameter
+
 components:
   schemas:
+    metaContent:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: OK
+    metaParent:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/metaContent'
+
+
     InventoryItem:
       required:
       - id
